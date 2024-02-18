@@ -36,9 +36,9 @@ npm install
 ## Usage
 To start crawling and cloning a website, run the script with the following command:
 ```bash
-node script.js <startUrl> [projectNamespace]
+node script.js [startUrl] [projectNamespace]
 ```
-- <startUrl>: The URL of the website you wish to clone. This is a required argument.
+- [startUrl]: The URL of the website you wish to clone. This is a required argument.
 - [projectNamespace]: An optional argument to specify a namespace for the project. If omitted, the hostname of the startUrl will be used.
 
 ## Configuration
