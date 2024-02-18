@@ -8,7 +8,8 @@ const path = require('path')
 require('colors')
 
 /**
- * Global variables
+ * The namespace for the project.
+ * @type {string}
  */
 const startUrl = process.argv[2] || ''
 const projectNamespace = process.argv[3] || (new URL(startUrl)).hostname
@@ -16,7 +17,7 @@ const visitedUrls = new Set()
 const crawlPromises = []
 
 /**
- * @description: custom log class
+ * Represents a logger clone.
  */
 class loggerClone {
   apply(registerAction) {
@@ -42,7 +43,8 @@ class loggerClone {
 }
 
 /**
- * @description: clone website function
+ * Clones a website by crawling its pages and saving them to the output directory.
+ * @returns {Promise<boolean>} A promise that resolves to true if the website cloning is successful, or rejects with an error if it fails.
  */
 const cloneWebsite = () => new Promise(async (resolve, reject) => {
   const outputDirectory = path.resolve(__dirname, `output/${projectNamespace}`)
@@ -78,9 +80,10 @@ const cloneWebsite = () => new Promise(async (resolve, reject) => {
 })
 
 /**
- * @param {*} url 
- * @param {*} depth
- * @description: crawl website function 
+ * Crawls a website and retrieves all the links within a given depth.
+ * @param {string} url - The URL of the website to crawl.
+ * @param {number} [depth=0] - The depth of the crawl (default is 0).
+ * @returns {Promise<void>} - A promise that resolves when the crawling is complete.
  */
 const crawlWebsite = (url, depth = 0) => new Promise(async (resolve, reject) => {
   if (depth > 3 || visitedUrls.has(url)) {
@@ -110,7 +113,9 @@ const crawlWebsite = (url, depth = 0) => new Promise(async (resolve, reject) => 
 })
 
 /**
- * @description: Run main function
+ * Runs the website crawler app.
+ * @param {string} url - The URL of the website to crawl.
+ * @returns {Promise<void>} - A promise that resolves when the crawling and cloning process is complete.
  */
 const run = async (url) => {
   try {
